@@ -1,0 +1,58 @@
+import 'package:flutter/material.dart';
+
+Widget defaultTextForm({
+  required TextEditingController controller,
+  TextInputType? type,
+  String? label,
+  TextStyle? labelStyle,
+  InputBorder? border,
+  InputBorder? focusedBorder,
+  InputBorder? enableBorder,
+  Icon? prefix,
+  IconData? suffix,
+  ValueChanged<String>? onSubmit,
+  FormFieldValidator<String>? validate,
+  ValueChanged<String>? onChange,
+  bool isPassword = false,
+  String? hint,
+  int? maxLines,
+  AutovalidateMode? autoValidateMode,
+  Iterable<String>? autofillHints,
+  suffixPressed,
+  bool? filled,
+  Color? fillColor,
+  Color? suffixIconColor,
+}) =>
+    Padding(
+      padding: const EdgeInsets.only(left: 25.0, right: 25.0),
+      child: TextFormField(
+        controller: controller,
+        keyboardType: type,
+        validator: validate,
+        obscureText: isPassword,
+        onChanged: onChange,
+        onFieldSubmitted: onSubmit,
+        maxLines: maxLines,
+        autovalidateMode: autoValidateMode,
+        enableSuggestions: true,
+        autofillHints: autofillHints,
+        decoration: InputDecoration(
+          filled: filled,
+          fillColor: fillColor,
+          hintText: hint,
+          labelText: label,
+          labelStyle: labelStyle,
+          prefixIcon: prefix,
+          suffixIcon: IconButton(
+            icon: Icon(
+              suffix,
+              color: suffixIconColor,
+            ),
+            onPressed: suffixPressed,
+          ),
+          enabledBorder: enableBorder,
+          focusedBorder: focusedBorder,
+          border: border,
+        ),
+      ),
+    );

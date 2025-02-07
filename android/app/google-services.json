@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "788723699764",
+    "project_id": "chat-app-rama",
+    "storage_bucket": "chat-app-rama.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:788723699764:android:3e1967c872097712fc7a61",
+        "android_client_info": {
+          "package_name": "com.example.chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "788723699764-c9oaam0nd9161i7huhbek2kdr95v83dr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.chat",
+            "certificate_hash": "66afdc6efebc1aae6e2d82080e618a15a624efef"
+          }
+        },
+        {
+          "client_id": "788723699764-r7a4dvlrdd2t305u5g6uc5tttevpi43s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_-JWfpyqqnpee3YFxv7iL4Gls-gD-FOE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "788723699764-r7a4dvlrdd2t305u5g6uc5tttevpi43s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
