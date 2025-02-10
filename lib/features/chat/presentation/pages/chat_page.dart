@@ -1,3 +1,4 @@
+import 'package:chat/generated/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:chat/core/util/colors.dart';
@@ -160,7 +161,7 @@ CircleAvatar(
 radius: 20,
 backgroundImage: user.photoUrl != null
     ? NetworkImage(user.photoUrl!)
-    : const AssetImage('assets/default_avatar.png') as ImageProvider,
+    : const AssetImage(Assets.assetsDefaultAvatar) as ImageProvider,
 // backgroundColor: grey[300],
 ),
 const SizedBox(width: 10),

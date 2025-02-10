@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../core/util/colors.dart';
+import '../../../../generated/assets.dart';
 import '../../domain/entities/message.dart';
 import '../../domain/entities/user.dart';
 
@@ -15,7 +16,7 @@ Widget chatItem({
       radius: 25,
       backgroundImage: user.photoUrl != null
           ? NetworkImage(user.photoUrl!)
-          : const AssetImage('assets/default_avatar.png') as ImageProvider,
+          : const AssetImage(Assets.assetsDefaultAvatar) as ImageProvider,
     ),
     title: Text(
       user.name!,

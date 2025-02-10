@@ -8,6 +8,7 @@ import '../../../../core/util/icons.dart';
 import '../../../../core/util/navigator.dart';
 import '../../../../core/util/snackbar_message.dart';
 import '../../../../core/widgets/loading_widget.dart';
+import '../../../../generated/assets.dart';
 import '../../../chat/presentation/pages/home_page.dart';
 import '../../data/datasources/auth_local_data_source.dart';
 import '../../domain/entities/sign_up_entity.dart';
@@ -216,7 +217,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   context: context,
                   imgColor: red,
                   borderColor: grey,
-                  imagePath: "assets/google_icon.png",
+                  imagePath: Assets.assetsGoogleIcon,
                   onPressed: (){
                     authCubit(context).signInWithGoogle();
                   },

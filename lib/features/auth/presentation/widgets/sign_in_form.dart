@@ -8,6 +8,7 @@ import '../../../../core/util/icons.dart';
 import '../../../../core/util/navigator.dart';
 import '../../../../core/util/snackbar_message.dart';
 import '../../../../core/widgets/loading_widget.dart';
+import '../../../../generated/assets.dart';
 import '../../../chat/presentation/pages/home_page.dart';
 import '../../data/datasources/auth_local_data_source.dart';
 import '../../domain/entities/sign_in_entity.dart';
@@ -163,7 +164,7 @@ class _LoginFormState extends State<LoginForm> {
                       context: context,
                         imgColor: red,
                         borderColor: grey,
-                        imagePath: "assets/google_icon.png",
+                        imagePath: Assets.assetsGoogleIcon,
                         onPressed: (){
                           authCubit(context).signInWithGoogle();
                         },
@@ -171,7 +172,7 @@ class _LoginFormState extends State<LoginForm> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("Need an account?"),
+                    const Text("Need an account ?"),
                     TextButton(
                         onPressed: (){
                           navigateAndReplace(context , SignUp());

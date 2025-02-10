@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/responsive_ui.dart';
+import '../../../../generated/assets.dart';
 import '../widgets/sign_up_form.dart';
 
 class SignUp extends StatelessWidget{
@@ -16,7 +17,7 @@ class SignUp extends StatelessWidget{
               child: Image(
                   height: Responsive.heightMultiplier(context) * 28,
                   width: Responsive.width(context) * 0.3,
-                  image: AssetImage("assets/sign_in.png")),
+                  image: AssetImage(Assets.assetsSignIn)),
             ),
             Center(
                 child: Text("Sign Up",

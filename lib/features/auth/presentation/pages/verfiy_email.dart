@@ -4,6 +4,7 @@ import '../../../../core/responsive_ui.dart';
 import '../../../../core/util/colors.dart';
 import '../../../../core/util/navigator.dart';
 import '../../../../core/util/snackbar_message.dart';
+import '../../../../generated/assets.dart';
 import '../../../chat/presentation/pages/home_page.dart';
 import '../../data/datasources/auth_local_data_source.dart';
 import 'cubit/auth_cubit.dart';
@@ -31,7 +32,7 @@ class VerifyEmail extends StatelessWidget{
               children: [
                 const Padding(
                   padding: EdgeInsets.all(50),
-                  child: Image(image: AssetImage('assets/email_verify.png')),
+                  child: Image(image: AssetImage(Assets.assetsEmailVerify)),
                 ),
                 Text('Verify your E-Mail address',
                     style: TextStyle(fontWeight: FontWeight.bold,
