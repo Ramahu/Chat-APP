@@ -68,11 +68,11 @@ class AuthWrapper extends StatelessWidget {
 
                 return HomePage(currentUserId: currentUserId);
               }
-              return  SignIn();
+              return  const SignIn();
             },
           );
         } else {
-          return  SignIn();
+          return  const SignIn();
         }
       },
     );
