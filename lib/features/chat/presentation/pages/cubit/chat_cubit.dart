@@ -29,20 +29,35 @@ class ChatCubit extends Cubit<ChatState> {
 
   Future<void> addMessage(MessageEntity messageEntity,String chatId) async {
     emit(LoadingState());
-    final failureOrUint = await addMessageUseCase(message: messageEntity,chatId: chatId);
+    final failureOrUint = await addMessageUseCase(AddMessageParams(message: messageEntity, chatId: chatId));
     emit(eitherToState(failureOrUint, AddMessageSuccessState()));
   }
 
-  Stream<List<MessageEntity>> getMessages(String chatId) async* {
-    emit(LoadingState());
-    final messageStream = getMessagesUseCase(chatId);
-    await for (final either in messageStream) {
-      either.fold(
-            (failure) => emit(ErrorChatState(message: _mapFailureToMessage(failure))),
-            (listUserMsg) => emit(GetMessagesSuccessState(listUserMsg: listUserMsg)),
+  // Stream<List<MessageEntity>> getMessages(String chatId) async* {
+  //   emit(LoadingState());
+  //   final messageStream = getMessagesUseCase(chatId);
+  //   // print('Fetched in cubit ${messageStream.length} messages');
+  //   await for (final either in messageStream) {
+  //     either.fold(
+  //           (failure) => emit(ErrorChatState(message: _mapFailureToMessage(failure))),
+  //           (listUserMsg) => emit(GetMessagesSuccessState(listUserMsg: listUserMsg)),
+  //     );
+  //   }
+  // }
+
+  Stream<List<MessageEntity>> getMessages(String chatId) {
+    return getMessagesUseCase(chatId).map((either) {
+      return either.fold(
+            (failure) { emit(ErrorChatState(message: _mapFailureToMessage(failure)));
+          return [];
+        },
+            (messages) { emit(GetMessagesSuccessState(listUserMsg: messages));
+          return messages;
+        },
       );
-    }
+    });
   }
+
 
   Future<void> getUserList(String currentUserId) async {
     emit(LoadingState());
@@ -70,18 +85,18 @@ class ChatCubit extends Cubit<ChatState> {
     emit(LoadingState());
     final failureOrLastMsg = await getLastMessageUseCase(chatId);
     emit(eitherToStates(failureOrLastMsg, (result) {
-      final lastMsg = result['lastMessage'];
-      final lastMsgTime = result['lastMessageTime'];
+      String lastMessage = result.$1;
+      DateTime? lastMessageTime = result.$2;
 
       _lastMessagesAndTime[chatId] = {
-        'message': lastMsg!,
-        'time': lastMsgTime!,
+        'message': lastMessage,
+        'time': lastMessageTime!,
       };
 
       return GetLastMessageSuccessState(
         chatId: chatId,
-        message: lastMsg,
-        time: lastMsgTime,
+        message: lastMessage,
+        time: lastMessageTime,
       );
     }));
   }

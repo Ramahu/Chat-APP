@@ -8,7 +8,7 @@ const defaultGreen = Color(0xFF96D9DC);
 const defaultGreen2 = Color(0xFF55C1CE);
 const indigoAccent = Colors.indigoAccent;
 const defaultNavyBlue = Color(0xFF2B37C4);
-const defaultBlue2 = Color(0xFF4550F4);
+const defaultBlue2 = Color(0xFF7D86FB);
 
 const white = Colors.white;
 const white70 = Colors.white70;

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../../../core/responsive_ui.dart';
 import '../../../../core/util/colors.dart';
 
@@ -23,8 +22,8 @@ Widget defaultGradientBottom({
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            color1, // Replace with your desired start color
-            color2, // Replace with your desired end color
+            color1,
+            color2,
           ],
         ),
       ),

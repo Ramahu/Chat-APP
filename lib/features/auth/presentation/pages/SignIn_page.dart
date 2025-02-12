@@ -15,18 +15,21 @@ class SignIn extends StatelessWidget{
           children:  [
             SizedBox(height: Responsive.heightMultiplier(context) * 1.5,),
             Padding(
-              padding: EdgeInsets.all(20.0),
-              child: Image(
-                  height: Responsive.heightMultiplier(context) * 28,
-                  width: Responsive.width(context) * 0.3 ,
-                  image: AssetImage(Assets.assetsSignIn)),
+              padding: const EdgeInsets.all(20.0),
+              child: Hero(
+                tag: 'sign',
+                child: Image(
+                    height: Responsive.heightMultiplier(context) * 28,
+                    width: Responsive.width(context) * 0.3 ,
+                    image: const AssetImage(Assets.assetsSignIn)),
+              ),
             ),
             Center(
                 child: Text("Log In",
                   style: TextStyle(fontSize: Responsive.textMultiplier(context) * 7  ,
                       fontWeight: FontWeight.bold),)),
-            SizedBox(height: Responsive.heightMultiplier(context) * 1,),
-            LoginForm(),
+            SizedBox(height: Responsive.heightMultiplier(context) * 1.5,),
+            const LoginForm(),
           ],
         ),
       ),

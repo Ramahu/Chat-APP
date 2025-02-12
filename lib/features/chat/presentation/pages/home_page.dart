@@ -26,8 +26,11 @@ class HomePage extends StatelessWidget{
         appBar: appbar(context: context),
     body: SafeArea(
     child: Padding(
-    padding: EdgeInsets.all(10.0),
-    child: BlocConsumer<ChatCubit,ChatState>(
+    padding: const EdgeInsets.all(10.0),
+    child: RefreshIndicator(
+    onRefresh: () async {
+      context.read<ChatCubit>().getUserList(currentUserId.toString()); },
+    child:  BlocConsumer<ChatCubit,ChatState>(
     listener: (context , state){
       if (state is ErrorChatState){
     SnackBarMessage().showSnackBar(
@@ -36,16 +39,17 @@ class HomePage extends StatelessWidget{
     },
     builder: (context,state) {
     if(state is LoadingState){
-    return LoadingWidget();
+    return const LoadingWidget();
     }else if (state is GetUserListSuccessState) {
       final usersList = state.usersList;
       if(usersList.isNotEmpty ){
       return chatsList(usersList,currentUserId);}
-      else {return Center(child: Text("No chats yet."));}
+      else {return const Center(child: Text("No chats yet."));}
     }
     else {
-    return Center(child: Text("No chats yet."));}
+    return const Center(child: Text("No chats yet."));}
     }
+    )
     )
     )
     )
@@ -74,17 +78,18 @@ PreferredSizeWidget appbar({required BuildContext context}) => AppBar(
 Widget chatsList(List<UserEntity> usersList, String currentUserId) {
   return ListView.separated(
     itemCount: usersList.length,
-    separatorBuilder: (_, __) => Divider(),
+    separatorBuilder: (_, __) => const Divider(),
     itemBuilder: (context, index) {
       final user = usersList[index];
       final chatId = context.read<ChatCubit>().generateChatId(currentUserId, user.uid!);
       final lastMessageData = context.read<ChatCubit>().getLastMessageForChat(chatId);
       final lastMessage = lastMessageData?['message'] ?? 'No messages yet';
-      final DateTime lastMessageTime = lastMessageData?['time'] ?? '';
+      final DateTime? lastMessageTime = lastMessageData?['time'] ;
+
       return chatItem(
         user: user,
         lastMessage: lastMessage,
-        lastMessageTime : lastMessageTime,
+        lastMessageTime : lastMessageTime == null ? 'now': _formatTimestamp(lastMessageTime) ,
         onTap: () {
           navigateTo(context, ChatPage(currentUserId: currentUserId,
             receiverUser: user,chatId: chatId,));
@@ -92,4 +97,15 @@ Widget chatsList(List<UserEntity> usersList, String currentUserId) {
       );
     },
   );
+}
+
+String _formatTimestamp(DateTime timestamp) {
+  final now = DateTime.now();
+  if (now.difference(timestamp).inDays == 0) {
+    return "${timestamp.hour.toString().padLeft(2, '0')}:${timestamp.minute.toString().padLeft(2, '0')}";
+  } else if (now.difference(timestamp).inDays == 1) {
+    return "Yesterday";
+  } else {
+    return "${timestamp.day}/${timestamp.month}/${timestamp.year}";
+  }
 }

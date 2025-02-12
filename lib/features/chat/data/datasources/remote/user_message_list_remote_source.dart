@@ -6,7 +6,7 @@ import '../../models/message_model.dart';
 abstract class UserMessageListRemoteSource {
   Stream<List<MessageEntity>> getAllMessages(String chatId);
   Future<void> addMessage({ required MessageEntity messageEntity ,required String chatId});
-  Future<Map<String, dynamic>?> getLastMessage(String chatId);
+  Future<(String, DateTime?)?> getLastMessage(String chatId);
 
 }
 
@@ -84,21 +84,19 @@ class UserMessageListRemoteSourceImpl implements UserMessageListRemoteSource {
   // }
 
   @override
-  Future<Map<String, dynamic>?> getLastMessage(String chatId) async {
+  Future<(String, DateTime?)?> getLastMessage(String chatId) async {
     try {
       final chatDoc = await fireStore.collection("chats").doc(chatId).get();
 
-      if (chatDoc.exists &&
+      if (chatDoc.exists &&  chatDoc.data() != null &&
           chatDoc.data()!.containsKey('lastMessage') &&
           chatDoc.data()!.containsKey('lastMessageTime')) {
 
         String lastMessage = chatDoc.get('lastMessage');
-        DateTime lastMessageTime = chatDoc.get('lastMessageTime');
+        Timestamp? timestamp = chatDoc.data()?['lastMessageTime'];
+        DateTime? lastMessageTime = timestamp?.toDate(); // 🔹 Convert Timestamp → DateTime
 
-        return {
-          'lastMessage': lastMessage,
-          'lastMessageTime': lastMessageTime,
-        };
+        return (lastMessage, lastMessageTime);
       }
       return null;
     } catch (e) {

@@ -16,6 +16,4 @@ abstract class AuthenticationRepository {
   Future<Either<Failure, Unit>> checkEmailVerification(Completer completer);
   Future<Either<Failure, Unit>>  logOut();
 
-
-
 }

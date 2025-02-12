@@ -39,6 +39,8 @@ class _SignUpFormState extends State<SignUpForm> {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Form(
@@ -47,6 +49,9 @@ class _SignUpFormState extends State<SignUpForm> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             defaultTextForm(
+              width: Responsive.width(context) * 0.8,
+              height: Responsive.heightMultiplier(context) * 7,
+              bgColor:  isDarkMode ? grey[800] :grey[200],
               controller: _usernameController,
               type: TextInputType.text,
               autoValidateMode: AutovalidateMode.onUserInteraction,
@@ -65,12 +70,15 @@ class _SignUpFormState extends State<SignUpForm> {
                 }
                 return null;
               },
-              border:outlineBorder,
-              focusedBorder: outlineBorder,
-              enableBorder: outlineBorder,
+              border:noneBorder,
+              focusedBorder: noneBorder,
+              enableBorder: noneBorder,
             ),
             SizedBox(height: Responsive.heightMultiplier(context) * 2,),
             defaultTextForm(
+              width: Responsive.width(context) * 0.8,
+              height: Responsive.heightMultiplier(context) * 7,
+              bgColor:  isDarkMode ? grey[800] :grey[200],
               controller: _emailController,
               type: TextInputType.emailAddress,
               autoValidateMode:
@@ -93,12 +101,15 @@ class _SignUpFormState extends State<SignUpForm> {
                 }
                 return null;
               },
-              border:outlineBorder,
-              focusedBorder: outlineBorder,
-              enableBorder: outlineBorder,
+              border:noneBorder,
+              focusedBorder: noneBorder,
+              enableBorder: noneBorder,
             ),
             SizedBox(height: Responsive.heightMultiplier(context) * 2,),
         defaultTextForm(
+          width: Responsive.width(context) * 0.8,
+          height: Responsive.heightMultiplier(context) * 7,
+          bgColor:  isDarkMode ? grey[800] :grey[200],
           controller: _passwordController,
           type: TextInputType.visiblePassword,
           label: 'Password',
@@ -129,12 +140,15 @@ class _SignUpFormState extends State<SignUpForm> {
             }
             return null;
           },
-          border: outlineBorder,
-          focusedBorder: outlineBorder,
-          enableBorder: outlineBorder,
+          border:noneBorder,
+          focusedBorder: noneBorder,
+          enableBorder: noneBorder,
           ),
             SizedBox(height: Responsive.heightMultiplier(context) * 2,),
             defaultTextForm(
+              width: Responsive.width(context) * 0.8,
+              height: Responsive.heightMultiplier(context) * 7,
+              bgColor:  isDarkMode ? grey[800] :grey[200],
               controller: _confirmPasswordController,
               type: TextInputType.visiblePassword,
               label: 'Confirm Password',
@@ -165,9 +179,9 @@ class _SignUpFormState extends State<SignUpForm> {
                 }
                 return null;
               },
-              border: outlineBorder,
-              focusedBorder: outlineBorder,
-              enableBorder: outlineBorder,
+              border:noneBorder,
+              focusedBorder: noneBorder,
+              enableBorder: noneBorder,
             ),
             SizedBox(height: Responsive.heightMultiplier(context) * 2.5,),
             BlocConsumer<AuthCubit ,AuthState>(
@@ -175,7 +189,7 @@ class _SignUpFormState extends State<SignUpForm> {
                 final AuthLocalDataSourceImpl authLocalDataSourceImpl = AuthLocalDataSourceImpl();
                 if(state is SignedUpState){
                    authLocalDataSourceImpl.cacheUid(state.uid);
-                  navigateTo(context, VerifyEmail());
+                  navigateTo(context, const VerifyEmail());
                   authCubit(context).sendEmailVerification();
                 }else if (state is GoogleSignInState){
                   authLocalDataSourceImpl.cacheUid(state.uid);
@@ -192,7 +206,7 @@ class _SignUpFormState extends State<SignUpForm> {
                 }
                 return defaultGradientBottom(
                     text: 'Create Account',
-                    width: Responsive.width(context) * 0.75,
+                    width: Responsive.width(context) * 0.8,
                     height: Responsive.heightMultiplier(context) * 6.5,
                     context: context,
                     color1: indigoAccent,
@@ -229,7 +243,7 @@ class _SignUpFormState extends State<SignUpForm> {
                 const Text("Have an account?"),
                 TextButton(
                     onPressed: (){
-                      navigateAndReplace(context , SignIn());
+                      navigateAndReplace(context , const SignIn());
                     },
                     child: const Text("Login") )
               ],

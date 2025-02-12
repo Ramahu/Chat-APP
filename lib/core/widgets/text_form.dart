@@ -22,9 +22,19 @@ Widget defaultTextForm({
   bool? filled,
   Color? fillColor,
   Color? suffixIconColor,
+  Color? bgColor,
+  double? width,
+  double? height,
+  double radius = 35.0,
+
 }) =>
-    Padding(
-      padding: const EdgeInsets.only(left: 25.0, right: 25.0),
+    Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      width: width,
+      height: height,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(radius),
+      color: bgColor),
       child: TextFormField(
         controller: controller,
         keyboardType: type,

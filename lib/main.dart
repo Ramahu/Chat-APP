@@ -20,7 +20,7 @@ void main() async {
   );
   await CacheHelper.init();
   await di.init();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return MultiBlocProvider(
         providers: [
           BlocProvider(create: (_) =>  di.sl<AuthCubit>()..checkLoggingIn(),),
@@ -37,10 +38,11 @@ class MyApp extends StatelessWidget {
                 title: 'Chat App',
                 theme: AppTheme.lightTheme(context),
                 darkTheme: AppTheme.darkTheme(context),
-                // themeMode: ThemeMode.system,
+                themeMode: ThemeMode.system,
                 debugShowCheckedModeBanner: false,
                 home:  const AuthWrapper(),
               ),
+
     );
   }
 }
@@ -68,15 +70,15 @@ class AuthWrapper extends StatelessWidget {
 
                 return HomePage(currentUserId: currentUserId);
               }
-              return  SignIn();
+              return  const SignIn();
             },
           );
         } else {
-          return  SignIn();
+          return  const SignIn();
         }
       },
     );
   }
 }
 
-//flutter_advanced_drawer: ^1.4.0
+ // git push --force origin master

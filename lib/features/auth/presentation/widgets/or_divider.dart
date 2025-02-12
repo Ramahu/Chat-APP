@@ -11,7 +11,7 @@ Widget orDivider()=> Container(
             constraints: const BoxConstraints(
                 maxWidth: 500
             ),
-            child: Divider(thickness: 2,color: grey,)),
+            child: const Divider(thickness: 2,color: grey,)),
         Positioned(
           child: Container(
             decoration: BoxDecoration(

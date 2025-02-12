@@ -6,7 +6,7 @@ import '../../domain/entities/user.dart';
 Widget chatItem({
   required UserEntity user,
   required String lastMessage,
-  required DateTime lastMessageTime,
+  required String lastMessageTime ,
   required VoidCallback onTap,
 }) {
   return ListTile(
@@ -28,20 +28,8 @@ Widget chatItem({
       style: const TextStyle(color: grey),
     ),
     trailing: Text(
-      _formatTimestamp(lastMessageTime),
+        lastMessageTime,
       style: const TextStyle(fontSize: 12, color: grey),
     ),
   );
-}
-
-// Helper function to format the timestamp
-String _formatTimestamp(DateTime timestamp) {
-  final now = DateTime.now();
-  if (now.difference(timestamp).inDays == 0) {
-    return "${timestamp.hour.toString().padLeft(2, '0')}:${timestamp.minute.toString().padLeft(2, '0')}";
-  } else if (now.difference(timestamp).inDays == 1) {
-    return "Yesterday";
-  } else {
-    return "${timestamp.day}/${timestamp.month}/${timestamp.year}";
-  }
 }

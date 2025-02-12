@@ -4,7 +4,7 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'core/network/network_info.dart';
 import 'package:get_it/get_it.dart';
-import 'features/auth/data/datasources/auth_remote_data_source.dart';
+import 'features/auth/data/dataSources/auth_remote_data_source.dart';
 import 'features/auth/data/repositories/auth_repository_impl.dart';
 import 'features/auth/domain/repositories/authentication_repository.dart';
 import 'features/auth/domain/useCases/check_verification_useCase.dart';
@@ -32,7 +32,7 @@ final sl = GetIt.instance;
 
 Future<void> init() async {
 
-// cubit
+  // cubit
 // Auth feature
   sl.registerFactory(() => AuthCubit(signInUseCase: sl(),
       signUpUseCase: sl(),createUserUseCase: sl(), firstPage: sl() , verifyEmailUseCase: sl(),
@@ -42,7 +42,7 @@ Future<void> init() async {
       getMessagesUseCase: sl(), getUserListUseCase: sl() ,getLastMessageUseCase : sl()));
 
 
-// Use Cases
+  // Use Cases
 // Auth feature
   sl.registerLazySingleton(() => SignInUseCase(sl()));
   sl.registerLazySingleton(() => SignUpUseCase(sl()));
@@ -60,7 +60,6 @@ Future<void> init() async {
 
 
 
-
 // Repository
 // Auth feature
   sl.registerLazySingleton<AuthenticationRepository>(() => AuthenticationRepositoryImp(
@@ -68,6 +67,7 @@ Future<void> init() async {
   // Chat feature
   sl.registerLazySingleton<ChatListRepository>(() => ChatListRepoImpl( networkInfo: sl(),firebaseRemote: sl()));
   sl.registerLazySingleton<UserListMessagesRepo>(() => UserMessagesListRepoImpl( networkInfo: sl(),userMessageListRemoteSource: sl()));
+
 
 
 // Data Sources
@@ -80,12 +80,11 @@ Future<void> init() async {
   sl.registerLazySingleton<ChatListFirebaseRemoteSource>(
           () => ChatListFirebaseRemoteImpl(fireStore: sl()));
 
-
-//! Core
+  //! Core
 
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
 
-//! External
+  //! External
 
   sl.registerLazySingleton(() => InternetConnectionChecker.createInstance());
   final sharedPreferences = await SharedPreferences.getInstance();
@@ -94,8 +93,5 @@ Future<void> init() async {
   sl.registerLazySingleton(() => fireStore);
   final  firebaseInstance = FirebaseAuth.instance;
   sl.registerLazySingleton(() => firebaseInstance);
-
-
-
 
 }

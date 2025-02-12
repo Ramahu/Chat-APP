@@ -34,8 +34,11 @@ class _LoginFormState extends State<LoginForm> {
   bool isVisible = false;
   final authCubit = BlocProvider.of<AuthCubit>;
 
+
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Form(
@@ -43,7 +46,10 @@ class _LoginFormState extends State<LoginForm> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                defaultTextForm(
+             defaultTextForm(
+               width: Responsive.width(context) * 0.8,
+               height: Responsive.heightMultiplier(context) * 7,
+               bgColor:  isDarkMode ? grey[800] :grey[200],
                   controller: _emailController,
                   type: TextInputType.emailAddress,
                   autoValidateMode:
@@ -63,12 +69,15 @@ class _LoginFormState extends State<LoginForm> {
                     }
                     return null;
                   },
-                  border:outlineBorder,
-                  focusedBorder: outlineBorder,
-                  enableBorder: outlineBorder,
+                  border:noneBorder,
+                  focusedBorder: noneBorder,
+                  enableBorder: noneBorder,
                 ),
                 SizedBox(height: Responsive.heightMultiplier(context) * 2,),
                 defaultTextForm(
+                  width: Responsive.width(context) * 0.8,
+                  height: Responsive.heightMultiplier(context) * 7,
+                  bgColor:  isDarkMode ? grey[800] :grey[200],
                   controller: _passwordController,
                   type: TextInputType.visiblePassword,
                   label: 'Password',
@@ -97,9 +106,9 @@ class _LoginFormState extends State<LoginForm> {
                     }
                     return null;
                   },
-                  border: outlineBorder,
-                  focusedBorder: outlineBorder,
-                  enableBorder: outlineBorder,
+                  border: noneBorder,
+                  focusedBorder: noneBorder,
+                  enableBorder: noneBorder,
                 ),
                  SizedBox(height: Responsive.heightMultiplier(context) * 2.5,),
 
@@ -130,7 +139,7 @@ class _LoginFormState extends State<LoginForm> {
                       authLocalDataSourceImpl.cacheUid(state.uid);
                       navigateAndFinish(context, HomePage(currentUserId:state.uid));
                     }else if (state is VerifyEmailPageState ){
-                      navigateTo(context, VerifyEmail());
+                      navigateTo(context, const VerifyEmail());
                       authCubit(context).sendEmailVerification();
                     }
                     else if (state is ErrorAuthState){
@@ -144,7 +153,7 @@ class _LoginFormState extends State<LoginForm> {
                     }
                     return defaultGradientBottom(
                     text: ' Log In',
-                    width: Responsive.width(context) * 0.75,
+                    width: Responsive.width(context) * 0.8,
     height: Responsive.heightMultiplier(context) * 6,
     context: context,
     color1: indigoAccent,
@@ -174,7 +183,7 @@ class _LoginFormState extends State<LoginForm> {
                     const Text("Need an account ?"),
                     TextButton(
                         onPressed: (){
-                          navigateAndReplace(context , SignUp());
+                          navigateAndReplace(context , const SignUp());
                         },
                         child: const Text("Sign Up") )
                   ],

@@ -9,3 +9,5 @@ color: indigoAccent,
 ),
 );
 
+const noneBorder = InputBorder.none;
+

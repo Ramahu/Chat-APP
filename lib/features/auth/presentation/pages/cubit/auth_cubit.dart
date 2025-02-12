@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dartz/dartz.dart';
 import '../../../../../core/error/failures.dart';
 import '../../../../../core/strings/failures.dart';
+import '../../../../../core/util/generic/NoParam.dart';
 import '../../../domain/entities/sign_in_entity.dart';
 import '../../../domain/entities/sign_up_entity.dart';
 import '../../../domain/useCases/check_verification_useCase.dart';
@@ -39,7 +40,7 @@ class AuthCubit extends Cubit<AuthState> {
   }) : super(AuthInitial());
 
   void checkLoggingIn() {
-    final theFirstPage = firstPage();
+    final theFirstPage = firstPage(NoParams());
     if (theFirstPage.isLoggedIn) {
       emit(SignedInPageState());
     }
@@ -82,7 +83,7 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<void> sendEmailVerification() async {
-    final failureOrSentEmail = await verifyEmailUseCase();
+    final failureOrSentEmail = await verifyEmailUseCase(NoParams());
     emit(eitherToState(failureOrSentEmail, EmailIsSentState()));
   }
 
@@ -96,13 +97,13 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<void> logOut() async {
-    final failureOrLogOut = await logOutUseCase();
+    final failureOrLogOut = await logOutUseCase(NoParams());
     emit(eitherToState(failureOrLogOut, LoggedOutState()));
   }
 
   Future<void> signInWithGoogle() async {
     emit(LoadingState());
-    final failureOrUserCredential = await googleAuthUseCase();
+    final failureOrUserCredential = await googleAuthUseCase(NoParams());
 
     emit(eitherToStates(failureOrUserCredential, (userCredential) {
       final user = userCredential.user;

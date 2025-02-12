@@ -15,18 +15,21 @@ class SignUp extends StatelessWidget{
           children: [
             SizedBox(height: Responsive.heightMultiplier(context) * 1,),
             Padding(
-              padding: EdgeInsets.all(20.0),
-              child: Image(
+              padding: const EdgeInsets.all(20.0),
+              child: Hero(
+                tag: 'sign',
+                child: Image(
                   height: Responsive.heightMultiplier(context) * 28,
                   width: Responsive.width(context) * 0.3,
-                  image: AssetImage(Assets.assetsSignIn)),
+                  image: const AssetImage(Assets.assetsSignIn)),
+            ),
             ),
             Center(
                 child: Text("Sign Up",
                   style: TextStyle(fontSize: Responsive.textMultiplier(context) * 7 ,
                       fontWeight: FontWeight.bold),)),
-            SizedBox(height: Responsive.heightMultiplier(context) * 1,),
-            SignUpForm(),
+            SizedBox(height: Responsive.heightMultiplier(context) * 1.5,),
+            const SignUpForm(),
           ],
         ),
       ),
