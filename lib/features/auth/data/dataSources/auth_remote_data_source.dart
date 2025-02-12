@@ -14,7 +14,6 @@ abstract class AuthRemoteDataSource {
   Future<Unit> verifyEmail();
 }
 
-
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   final FirebaseFirestore fireStore;
   FirebaseAuth firebaseInstance = FirebaseAuth.instance;
@@ -23,7 +22,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<UserCredential> signIn(SignInModel signIn) async {
     try {
-      // FirebaseAuth firebaseInstance = FirebaseAuth.instance;
       firebaseInstance.setSettings(appVerificationDisabledForTesting: true);
       await  firebaseInstance.currentUser?.reload();
      return  await firebaseInstance.signInWithEmailAndPassword(
@@ -44,7 +42,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<UserCredential> signUp(SignUpModel signUp) async {
     try {
-      // FirebaseAuth firebaseInstance = FirebaseAuth.instance;
       firebaseInstance.setSettings(appVerificationDisabledForTesting: true);
       await  firebaseInstance.currentUser?.reload();
       return await firebaseInstance.createUserWithEmailAndPassword(
@@ -66,10 +63,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   Future<void> createUser(SignUpModel user) async {
     try {
       final usersCollectionRef = fireStore.collection("users");
-      final userDoc = await usersCollectionRef.doc(user.uid).get(); // Check if user exists
+      final userDoc = await usersCollectionRef.doc(user.uid).get();
 
       if (userDoc.exists) {
-        print('User already exists in Firestore.');
+        print('User already exists in Fire store.');
         return;
       }
       return await usersCollectionRef.doc(user.uid).set({
@@ -116,7 +113,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
     // Obtain the auth details from the request
     final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
-
     // Create a new credential
     final credential = GoogleAuthProvider.credential(
       accessToken: googleAuth?.accessToken,

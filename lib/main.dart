@@ -1,11 +1,10 @@
 import 'package:chat/features/auth/presentation/pages/SignIn_page.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'core/app_theme.dart';
 import 'core/network/local/cache_helper.dart';
-import 'features/auth/data/datasources/auth_local_data_source.dart';
+import 'features/auth/data/dataSources/auth_local_data_source.dart';
 import 'features/auth/presentation/pages/cubit/auth_cubit.dart';
 import 'features/auth/presentation/pages/cubit/auth_state.dart';
 import 'features/chat/presentation/pages/cubit/chat_cubit.dart';
@@ -34,12 +33,11 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (_) =>  di.sl<AuthCubit>()..checkLoggingIn(),),
           BlocProvider(create: (_) => di.sl<ChatCubit>()),
         ],
-
-              child: MaterialApp(
+      child: MaterialApp(
                 title: 'Chat App',
                 theme: AppTheme.lightTheme(context),
                 darkTheme: AppTheme.darkTheme(context),
-                themeMode: ThemeMode.system,
+                // themeMode: ThemeMode.system,
                 debugShowCheckedModeBanner: false,
                 home:  const AuthWrapper(),
               ),
@@ -64,14 +62,12 @@ class AuthWrapper extends StatelessWidget {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(child: CircularProgressIndicator());
               }
-
               if (snapshot.hasData && snapshot.data!.isNotEmpty) {
                 String currentUserId = snapshot.data!;
                 print("Current User ID in main: $currentUserId");
 
                 return HomePage(currentUserId: currentUserId);
               }
-
               return  SignIn();
             },
           );
@@ -83,3 +79,4 @@ class AuthWrapper extends StatelessWidget {
   }
 }
 
+//flutter_advanced_drawer: ^1.4.0

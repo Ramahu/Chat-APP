@@ -3,16 +3,11 @@ import '../../domain/entities/chat.dart';
 
 class ChatModel extends ChatEntity {
   ChatModel({
-    required String chatId,
-    required List<String> users,
-    required String lastMessage,
-    required DateTime lastMessageTime,
-  }) : super(
-    chatId: chatId,
-    users: users,
-    lastMessage: lastMessage,
-    lastMessageTime: lastMessageTime,
-  );
+    required super.chatId,
+    required super.users,
+    required super.lastMessage,
+    required super.lastMessageTime,
+  });
 
   static ChatModel fromJson(DocumentSnapshot json) {
     return ChatModel(

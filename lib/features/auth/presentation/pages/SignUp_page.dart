@@ -5,6 +5,8 @@ import '../../../../generated/assets.dart';
 import '../widgets/sign_up_form.dart';
 
 class SignUp extends StatelessWidget{
+  const SignUp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return  SafeArea(

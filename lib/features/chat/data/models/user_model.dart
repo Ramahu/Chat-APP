@@ -4,13 +4,11 @@ class UserModel extends UserEntity {
   UserModel({
     final String? email,
     final String? token,
-    final String? uid,
-    final String? name,
+    super.uid,
+    super.name,
   }) : super(
           email: email!,
           token: token!,
-          uid: uid,
-          name: name,
         );
 
 //This is where we define from json and to json methods.

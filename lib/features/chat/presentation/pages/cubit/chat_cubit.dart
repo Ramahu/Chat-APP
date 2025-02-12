@@ -25,7 +25,7 @@ class ChatCubit extends Cubit<ChatState> {
     required this.getLastMessageUseCase,
   }) : super(ChatInitialState());
 
-  final Map<String, String?> _lastMessages = {};
+  final Map<String, Map<String, dynamic>?> _lastMessagesAndTime = {};
 
   Future<void> addMessage(MessageEntity messageEntity,String chatId) async {
     emit(LoadingState());
@@ -33,7 +33,7 @@ class ChatCubit extends Cubit<ChatState> {
     emit(eitherToState(failureOrUint, AddMessageSuccessState()));
   }
 
-  Future<void> getMessages(String chatId) async {
+  Stream<List<MessageEntity>> getMessages(String chatId) async* {
     emit(LoadingState());
     final messageStream = getMessagesUseCase(chatId);
     await for (final either in messageStream) {
@@ -47,7 +47,6 @@ class ChatCubit extends Cubit<ChatState> {
   Future<void> getUserList(String currentUserId) async {
     emit(LoadingState());
     final failureOrListUserEntity = await getUserListUseCase(currentUserId);
-    // emit(eitherToState(failureOrUserEntity, GetUserListSuccessState()));
     emit(eitherToStates(failureOrListUserEntity, (listUserEntity) {
       for (var user in listUserEntity) {
         final chatId = generateChatId(currentUserId, user.uid!);
@@ -58,17 +57,37 @@ class ChatCubit extends Cubit<ChatState> {
 
   }
 
+  // Future<void> getLastMessage(String chatId) async {
+  //   emit(LoadingState());
+  //   final failureOrLastMsg = await getLastMessageUseCase(chatId);
+  //   emit(eitherToStates(failureOrLastMsg, (result) {
+  //     _lastMessages[chatId] = lastMsg;
+  //     return GetLastMessageSuccessState(chatId: chatId,message:lastMsg );
+  //   }));
+  // }
+
   Future<void> getLastMessage(String chatId) async {
     emit(LoadingState());
     final failureOrLastMsg = await getLastMessageUseCase(chatId);
-    // emit(eitherToState(failureOrLastMsg as Either, GetLastMessageSuccessState()));
-    emit(eitherToStates(failureOrLastMsg, (lastMsg) {
-      _lastMessages[chatId] = lastMsg;
-      return GetLastMessageSuccessState(chatId: chatId,message:lastMsg );
+    emit(eitherToStates(failureOrLastMsg, (result) {
+      final lastMsg = result['lastMessage'];
+      final lastMsgTime = result['lastMessageTime'];
+
+      _lastMessagesAndTime[chatId] = {
+        'message': lastMsg!,
+        'time': lastMsgTime!,
+      };
+
+      return GetLastMessageSuccessState(
+        chatId: chatId,
+        message: lastMsg,
+        time: lastMsgTime,
+      );
     }));
   }
-  String? getLastMessageForChat(String chatId) {
-    return _lastMessages[chatId];
+
+  Map<String, dynamic>? getLastMessageForChat(String chatId) {
+    return _lastMessagesAndTime[chatId];
   }
 
   String generateChatId(String userId1, String userId2) {
@@ -77,9 +96,9 @@ class ChatCubit extends Cubit<ChatState> {
     //     ? '${userId1}_$userId2'
     //     : '${userId2}_$userId1';
 
-    // List<String> uids = [uid1, uid2];
-    // uids.sort(); // Ensures consistent order
-    // return '${uids[0]}_${uids[1]}'; // e.g., uid1_uid2
+    // List<String> sortedIds = [userId1, userId2]..sort();
+    // return "${sortedIds[0]}_${sortedIds[1]}";
+
     return 'yJbcpkeiDxqpNAQDopnW' ;
   }
 

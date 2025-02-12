@@ -43,11 +43,11 @@ class UserMessagesListRepoImpl implements UserListMessagesRepo {
   }
 
   @override
-  Future<Either<Failure,String>> getLastMessage(String chatId) async{
+  Future<Either<Failure,Map<String, dynamic>>> getLastMessage(String chatId) async{
     if (await networkInfo.isConnected) {
       try {
-        String? lastMessage = await userMessageListRemoteSource.getLastMessage(chatId);
-        return  Right(lastMessage!);
+        Map<String, dynamic>? lastMessageAndTime = await userMessageListRemoteSource.getLastMessage(chatId);
+        return  Right(lastMessageAndTime!);
       } on ServerException {
         return Left(ServerFailure());
       }

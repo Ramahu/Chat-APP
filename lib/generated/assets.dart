@@ -7,6 +7,8 @@ class Assets {
   static const String assetsFacebookIcon = 'assets/facebook_icon.png';
   static const String assetsGoogleIcon = 'assets/google_icon.png';
   static const String assetsHomePageBackground = 'assets/home_page_background.gif';
+  static const String assetsLogo = 'assets/logo.png';
+  static const String assetsLogoWithName = 'assets/logo_with_name.jpg';
   static const String assetsSignIn = 'assets/sign_in.png';
   static const String assetsTwitterIcon = 'assets/twitter_icon.png';
 

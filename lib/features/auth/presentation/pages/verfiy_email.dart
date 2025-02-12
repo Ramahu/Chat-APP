@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/responsive_ui.dart';
-import '../../../../core/util/colors.dart';
 import '../../../../core/util/navigator.dart';
-import '../../../../core/util/snackbar_message.dart';
+import '../../../../core/util/snackBar_message.dart';
 import '../../../../generated/assets.dart';
 import '../../../chat/presentation/pages/home_page.dart';
 import '../../data/datasources/auth_local_data_source.dart';
@@ -11,6 +10,8 @@ import 'cubit/auth_cubit.dart';
 import 'cubit/auth_state.dart';
 
 class VerifyEmail extends StatelessWidget{
+  const VerifyEmail({super.key});
+
 
   @override
   Widget build(BuildContext context) {

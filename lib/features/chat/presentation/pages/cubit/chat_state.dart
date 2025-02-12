@@ -31,7 +31,8 @@ class GetUserListSuccessState extends ChatState{
 class GetLastMessageSuccessState extends ChatState{
   final String message ;
   final String chatId;
-  GetLastMessageSuccessState({required this.message , required this.chatId});
+  final DateTime time;
+  GetLastMessageSuccessState({required this.message , required this.chatId,required this.time});
   @override
   List<Object> get props => [message];
 }

@@ -2,24 +2,21 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../domain/entities/message.dart';
 
 class MessageModel extends MessageEntity {
-  MessageModel({
-    required String text,
-    required String senderId,
-    required String recieverId,
-    required DateTime time,
+  const MessageModel({
+    required super.text,
+    required super.senderId,
+    required String receiverId,
+    required super.time,
   }) : super(
-    time: time,
-    text: text,
-    senderId: senderId,
-    recieverId: recieverId,
+    recieverId: receiverId,
   );
 
-  static MessageModel fromJson(DocumentSnapshot json) {
+  factory MessageModel.fromJson(Map<String, dynamic> json) {
     return MessageModel(
-      senderId: json.get('senderId') as String,
-      time: (json.get('time') as Timestamp).toDate(),
-      text: json.get('text') as String,
-      recieverId: json.get('recieverId') as String,
+      senderId: json['senderId'] ?? '',
+      receiverId: json['receiverId'] ?? '',
+      text: json['text'] ?? '',
+      time: (json['time'] as Timestamp).toDate(),
     );
   }
 
@@ -28,7 +25,7 @@ class MessageModel extends MessageEntity {
       "senderId": senderId,
       "time": Timestamp.fromDate(time),
       "text": text,
-      "reciverId": recieverId,
+      "receiverId": recieverId,
     };
   }
 }

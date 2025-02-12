@@ -8,8 +8,8 @@ import '../../../../core/network/network_info.dart';
 import '../../domain/entities/sign_in_entity.dart';
 import '../../domain/entities/sign_up_entity.dart';
 import '../../domain/repositories/authentication_repository.dart';
-import '../datasources/auth_local_data_source.dart';
-import '../datasources/auth_remote_data_source.dart';
+import '../dataSources/auth_local_data_source.dart';
+import '../dataSources/auth_remote_data_source.dart';
 import '../models/first_page_model.dart';
 import '../models/sign_in_model.dart';
 import '../models/sign_up_model.dart';
@@ -135,8 +135,8 @@ class AuthenticationRepositoryImp implements AuthenticationRepository{
     if (await networkInfo.isConnected) {
       try {
         AuthLocalDataSourceImpl authLocalDataSourceImpl = AuthLocalDataSourceImpl();
-        GoogleSignIn _googleSignIn = GoogleSignIn();
-        await _googleSignIn.signOut();
+        GoogleSignIn googleSignIn = GoogleSignIn();
+        await googleSignIn.signOut();
         await FirebaseAuth.instance.signOut();
         await authLocalDataSourceImpl.removeCachedUid();
         return const Right(unit);

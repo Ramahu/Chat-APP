@@ -6,7 +6,7 @@ class GetLastMessageUseCase {
   final UserListMessagesRepo repository;
   GetLastMessageUseCase(this.repository);
 
-  Future<Either<Failure, String>> call(String chatId) {
+  Future<Either<Failure, Map<String, dynamic>>> call(String chatId) {
     return repository.getLastMessage(chatId);
   }
 }

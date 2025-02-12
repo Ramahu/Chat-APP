@@ -6,8 +6,7 @@ import '../../../../core/util/colors.dart';
 import '../../../../core/util/constant.dart';
 import '../../../../core/util/icons.dart';
 import '../../../../core/util/navigator.dart';
-import '../../../../core/util/snackbar_message.dart';
-import '../../../../core/widgets/loading_widget.dart';
+import '../../../../core/util/snackBar_message.dart';
 import '../../../../generated/assets.dart';
 import '../../../chat/presentation/pages/home_page.dart';
 import '../../data/datasources/auth_local_data_source.dart';
@@ -22,7 +21,7 @@ import 'or_divider.dart';
 import '../../../../core/widgets/text_form.dart';
 
 class SignUpForm extends StatefulWidget {
-  const SignUpForm({Key? key}) : super(key: key);
+  const SignUpForm({super.key});
 
   @override
   State<SignUpForm> createState() => _SignUpFormState();

@@ -6,7 +6,7 @@ class MessageEntity extends Equatable{
   final String recieverId;
   final DateTime time;
 
-  MessageEntity({
+  const MessageEntity({
     required this.time,
     required this.text,
     required this.recieverId,

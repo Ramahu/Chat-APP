@@ -2,15 +2,16 @@ import 'package:chat/generated/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:chat/core/util/colors.dart';
+import '../../../../core/responsive_ui.dart';
 import '../../../../core/util/icons.dart';
-import '../../../../core/util/snackbar_message.dart';
+import '../../../../core/util/navigator.dart';
 import '../../../../core/widgets/loading_widget.dart';
 import '../../../../core/widgets/text_form.dart';
 import '../../domain/entities/message.dart';
 import '../../domain/entities/user.dart';
 import '../widgets/message_bubble.dart';
 import 'cubit/chat_cubit.dart';
-import 'cubit/chat_state.dart';
+import 'home_page.dart';
 
 
 class ChatPage extends StatelessWidget{
@@ -23,32 +24,50 @@ class ChatPage extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    context.read<ChatCubit>().getMessages(chatId);
-
+    // context.read<ChatCubit>().getMessages(chatId);
     return Scaffold(
-        appBar: appbar(user: receiverUser,context: context),
+        appBar: appbar(currentUserId:currentUserId,user: receiverUser,context: context),
         body: Column(
           children: [
+            // Expanded(
+            //   child: BlocConsumer<ChatCubit, ChatState>(
+            //     listener: (context , state){
+            //       if (state is ErrorChatState){
+            //         SnackBarMessage().showSnackBar(
+            //             message: state.message, context: context, isError: true);
+            //       }
+            //     },
+            //     builder: (context, state) {
+            //       if (state is LoadingState) {
+            //         return LoadingWidget();
+            //       } else if (state is GetMessagesSuccessState) {
+            //         return messagesList(state.listUserMsg,currentUserId);
+            //       } else {
+            //         return Center(child: Text("No messages yet."));
+            //       }
+            //     },
+            //   ),
+            // ),
             Expanded(
-              child: BlocConsumer<ChatCubit, ChatState>(
-                listener: (context , state){
-                  if (state is ErrorChatState){
-                    SnackBarMessage().showSnackBar(
-                        message: state.message, context: context, isError: true);
-                  }
-                },
-                builder: (context, state) {
-                  if (state is LoadingState) {
+              child: StreamBuilder<List<MessageEntity>>(
+                stream: context.read<ChatCubit>().getMessages(chatId),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    // Show loading only when the chat is first opened
                     return LoadingWidget();
-                  } else if (state is GetMessagesSuccessState) {
-                    return messagesList(state.listUserMsg,currentUserId);
-                  } else {
+                  } else if (snapshot.hasError) {
+                    return Center(child: Text("Error: ${snapshot.error}"));
+                  } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
                     return Center(child: Text("No messages yet."));
+                  } else {
+                    return messagesList(snapshot.data!, currentUserId);
                   }
                 },
               ),
             ),
+            SizedBox(height: Responsive.heightMultiplier(context) * 0.5,),
             messageInputField(
+              context:  context,
               controller: _messageController,
               onSend: () {
                 final messageText = _messageController.text.trim();
@@ -69,31 +88,7 @@ class ChatPage extends StatelessWidget{
     );
   }
 }
-// StreamBuilder<List<MessageEntity>>(
-// stream: chatRepository.getAllMessages("user1_user2"), // Pass the chatId
-// builder: (context, snapshot) {
-// if (snapshot.connectionState == ConnectionState.waiting) {
-// return CircularProgressIndicator();
-// } else if (snapshot.hasError) {
-// return Text('Error: ${snapshot.error}');
-// } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-// return Text('No messages yet.');
-// }
-//
-// final messages = snapshot.data!;
-// return ListView.builder(
-// reverse: true, // To show the latest message at the bottom
-// itemCount: messages.length,
-// itemBuilder: (context, index) {
-// final message = messages[index];
-// return ListTile(
-// title: Text(message.messageText),
-// subtitle: Text(message.senderId),
-// );
-// },
-// );
-// },
-// );
+
 Widget messagesList(List<MessageEntity> messages, String currentUserId) {
   return ListView.builder(
     reverse: true, // To keep the latest message at the bottom
@@ -114,21 +109,17 @@ Widget messagesList(List<MessageEntity> messages, String currentUserId) {
 Widget messageInputField({
   required TextEditingController controller,
   required VoidCallback onSend,
+  required BuildContext context,
 }) {
+  final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
   return Container(
     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-    color: grey[500],
+    color:  isDarkMode ? grey[800] :grey[300],
     child: Row(
       children: [
         Expanded(
           child:
-          // TextField(
-          //   controller: controller,
-          //   decoration: InputDecoration(
-          //     hintText: "Type a message...",
-          //     border: InputBorder.none,
-          //   ),
-          // ),
           defaultTextForm(
             controller: controller,
             // type: TextInputType.text,
@@ -146,13 +137,14 @@ Widget messageInputField({
 }
 
 PreferredSizeWidget appbar({
-  required UserEntity user , required BuildContext context
+  required String currentUserId,
+  required UserEntity user ,
+  required BuildContext context
 }) => AppBar(
-elevation: 1,
 leading: IconButton(
-icon: const Icon(arrow_back, color:grey),
+icon: const Icon(arrow_back),
 onPressed: () {
-Navigator.pop(context);
+navigateAndFinish(context, HomePage(currentUserId:currentUserId));
 },
 ),
 title: Row(
@@ -171,8 +163,6 @@ children: [
 Text(
   user.name!,
 style: const TextStyle(
-color: black,
-fontWeight: FontWeight.bold,
 fontSize: 16,
 ),
 ),
@@ -190,17 +180,17 @@ fontSize: 12,
 ),
 actions: [
 IconButton(
-icon: const Icon(videocam, color: grey),
+icon: const Icon(videocam),
 onPressed: () {
 },
 ),
 IconButton(
-icon: const Icon(call, color: grey),
+icon: const Icon(call),
 onPressed: () {
 },
 ),
 IconButton(
-icon: const Icon(more_vert, color: grey),
+icon: const Icon(more_vert),
 onPressed: () {
 },
 ),

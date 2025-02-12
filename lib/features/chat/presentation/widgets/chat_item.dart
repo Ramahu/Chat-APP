@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import '../../../../core/util/colors.dart';
 import '../../../../generated/assets.dart';
-import '../../domain/entities/message.dart';
 import '../../domain/entities/user.dart';
 
 Widget chatItem({
   required UserEntity user,
   required String lastMessage,
-  // required String lastMessageTime,
+  required DateTime lastMessageTime,
   required VoidCallback onTap,
 }) {
   return ListTile(
@@ -28,10 +27,10 @@ Widget chatItem({
       overflow: TextOverflow.ellipsis,
       style: const TextStyle(color: grey),
     ),
-    // trailing: Text(
-    //   _formatTimestamp(lastMessageTime),
-    //   style: const TextStyle(fontSize: 12, color: grey),
-    // ),
+    trailing: Text(
+      _formatTimestamp(lastMessageTime),
+      style: const TextStyle(fontSize: 12, color: grey),
+    ),
   );
 }
 

@@ -6,8 +6,7 @@ import '../../../../core/util/colors.dart';
 import '../../../../core/util/constant.dart';
 import '../../../../core/util/icons.dart';
 import '../../../../core/util/navigator.dart';
-import '../../../../core/util/snackbar_message.dart';
-import '../../../../core/widgets/loading_widget.dart';
+import '../../../../core/util/snackBar_message.dart';
 import '../../../../generated/assets.dart';
 import '../../../chat/presentation/pages/home_page.dart';
 import '../../data/datasources/auth_local_data_source.dart';
@@ -22,7 +21,7 @@ import 'or_divider.dart';
 
 
 class LoginForm extends StatefulWidget {
-  const LoginForm({Key? key}) : super(key: key);
+  const LoginForm({super.key});
 
   @override
   State<LoginForm> createState() => _LoginFormState();

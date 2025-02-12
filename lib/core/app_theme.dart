@@ -14,6 +14,16 @@ class AppTheme {
         secondary: defaultBlue2,
       ),
       scaffoldBackgroundColor: white,
+      appBarTheme: AppBarTheme(
+        backgroundColor: white,
+        iconTheme: IconThemeData(color: black),
+        titleTextStyle: TextStyle(
+          color: black,
+          fontSize: Responsive.textMultiplier(context) * 5,
+          fontWeight: FontWeight.bold,
+        ),
+        elevation: 0,
+      ),
       textTheme: TextTheme(
         headlineLarge: TextStyle(fontSize: Responsive.textMultiplier(context) * 7 , fontWeight: FontWeight.bold, color: black),
         bodyLarge: TextStyle(fontSize: Responsive.textMultiplier(context) * 5, color: black87),
@@ -36,6 +46,16 @@ class AppTheme {
         secondary: defaultBlue2,
       ),
       scaffoldBackgroundColor: grey[900],
+      appBarTheme: AppBarTheme(
+        backgroundColor: grey[900],
+        iconTheme: IconThemeData(color: white),
+        titleTextStyle: TextStyle(
+          color: white,
+          fontSize: Responsive.textMultiplier(context) * 5,
+          fontWeight: FontWeight.bold,
+        ),
+        elevation: 0,
+      ),
       textTheme: TextTheme(
         headlineLarge: TextStyle(fontSize: Responsive.textMultiplier(context) * 7, fontWeight: FontWeight.bold, color: white),
         bodyLarge: TextStyle(fontSize: Responsive.textMultiplier(context) * 5, color: white70),
