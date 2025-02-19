@@ -7,13 +7,11 @@ class Assets {
   static const String assetsFacebookIcon = 'assets/facebook_icon.png';
   static const String assetsGoogleIcon = 'assets/google_icon.png';
   static const String assetsHaphatLogo = 'assets/haphat_logo.png';
-  static const String assetsHomePageBackground = 'assets/home_page_background.gif';
   static const String assetsLogo = 'assets/logo.png';
   static const String assetsLogo2 = 'assets/logo2.png';
   static const String assetsLogoWithName2 = 'assets/logo_with_name2.png';
   static const String assetsSignIn = 'assets/sign_in.png';
   static const String assetsTwitterIcon = 'assets/twitter_icon.png';
-
   static const String coreAppTheme = 'lib/core/app_theme.dart';
   static const String coreResponsiveUi = 'lib/core/responsive_ui.dart';
   static const String cubitAuthCubit = 'lib/features/auth/presentation/pages/cubit/auth_cubit.dart';
@@ -85,6 +83,6 @@ class Assets {
   static const String widgetsOrDivider = 'lib/features/auth/presentation/widgets/or_divider.dart';
   static const String widgetsSignInForm = 'lib/features/auth/presentation/widgets/sign_in_form.dart';
   static const String widgetsSignUpForm = 'lib/features/auth/presentation/widgets/sign_up_form.dart';
-  static const String widgetsTextForm = 'lib/core/widgets/text_form.dart';
+  static const String widgetsTextForm = 'lib/features/auth/presentation/widgets/text_form.dart';
 
 }

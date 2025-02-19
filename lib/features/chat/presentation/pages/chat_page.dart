@@ -8,7 +8,7 @@ import '../../../../core/util/icons.dart';
 import '../../../../core/util/navigator.dart';
 import '../../../../core/util/snackBar_message.dart';
 import '../../../../core/widgets/loading_widget.dart';
-import '../../../../core/widgets/text_form.dart';
+import '../../../auth/presentation/widgets/text_form.dart';
 import '../../domain/entities/message.dart';
 import '../../domain/entities/user.dart';
 import '../widgets/message_bubble.dart';

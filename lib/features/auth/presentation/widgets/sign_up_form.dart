@@ -18,7 +18,7 @@ import '../pages/verfiy_email.dart';
 import 'gradient_button.dart';
 import 'options_box.dart';
 import 'or_divider.dart';
-import '../../../../core/widgets/text_form.dart';
+import 'text_form.dart';
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({super.key});
@@ -49,7 +49,7 @@ class _SignUpFormState extends State<SignUpForm> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             defaultTextForm(
-              width: Responsive.width(context) * 0.8,
+              width: 400,
               height: Responsive.heightMultiplier(context) * 7,
               bgColor:  isDarkMode ? grey[800] :grey[200],
               controller: _usernameController,
@@ -58,6 +58,7 @@ class _SignUpFormState extends State<SignUpForm> {
               autofillHints: [AutofillHints.email],
               label: 'Full Name',
               labelStyle: const TextStyle(
+                fontSize: 18,
                 color: grey,
               ),
               prefix: const Icon(
@@ -76,7 +77,7 @@ class _SignUpFormState extends State<SignUpForm> {
             ),
             SizedBox(height: Responsive.heightMultiplier(context) * 2,),
             defaultTextForm(
-              width: Responsive.width(context) * 0.8,
+              width: 400,
               height: Responsive.heightMultiplier(context) * 7,
               bgColor:  isDarkMode ? grey[800] :grey[200],
               controller: _emailController,
@@ -86,6 +87,7 @@ class _SignUpFormState extends State<SignUpForm> {
               autofillHints: [AutofillHints.email],
               label: 'Email Address',
               labelStyle: const TextStyle(
+                fontSize: 18,
                 color: grey,
               ),
               prefix: const Icon(
@@ -107,13 +109,14 @@ class _SignUpFormState extends State<SignUpForm> {
             ),
             SizedBox(height: Responsive.heightMultiplier(context) * 2,),
         defaultTextForm(
-          width: Responsive.width(context) * 0.8,
+          width: 400,
           height: Responsive.heightMultiplier(context) * 7,
           bgColor:  isDarkMode ? grey[800] :grey[200],
           controller: _passwordController,
           type: TextInputType.visiblePassword,
           label: 'Password',
           labelStyle: const TextStyle(
+            fontSize: 18,
             color: grey,
           ),
           prefix: const Icon(
@@ -146,13 +149,14 @@ class _SignUpFormState extends State<SignUpForm> {
           ),
             SizedBox(height: Responsive.heightMultiplier(context) * 2,),
             defaultTextForm(
-              width: Responsive.width(context) * 0.8,
+              width: 400,
               height: Responsive.heightMultiplier(context) * 7,
               bgColor:  isDarkMode ? grey[800] :grey[200],
               controller: _confirmPasswordController,
               type: TextInputType.visiblePassword,
               label: 'Confirm Password',
               labelStyle: const TextStyle(
+                fontSize: 18,
                 color: grey,
               ),
               prefix: const Icon(
@@ -206,7 +210,7 @@ class _SignUpFormState extends State<SignUpForm> {
                 }
                 return defaultGradientBottom(
                     text: 'Create Account',
-                    width: Responsive.width(context) * 0.8,
+                    width: 400,
                     height: Responsive.heightMultiplier(context) * 6.5,
                     context: context,
                     color1: indigoAccent,
@@ -240,12 +244,15 @@ class _SignUpFormState extends State<SignUpForm> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text("Have an account?"),
-                TextButton(
-                    onPressed: (){
-                      navigateAndReplace(context , const SignIn());
+                const Text("Have an account?", style: TextStyle(fontSize: 18,)),
+                Flexible(
+                  child: TextButton(
+                    onPressed: () {
+                      navigateAndReplace(context, const SignIn());
                     },
-                    child: const Text("Login") )
+                    child: const Text("Login"),
+                  ),
+                ),
               ],
             )
           ],

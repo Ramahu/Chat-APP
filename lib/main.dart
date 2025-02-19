@@ -57,7 +57,6 @@ class AuthWrapper extends StatelessWidget {
       builder: (context, state) {
         if (state is SignedInPageState) {
           final authLocalDataSourceImpl = AuthLocalDataSourceImpl();
-
           return FutureBuilder<String?>(
             future: authLocalDataSourceImpl.getCachedUid(),
             builder: (context, snapshot) {

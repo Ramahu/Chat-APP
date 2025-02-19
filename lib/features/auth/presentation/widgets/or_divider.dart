@@ -9,7 +9,7 @@ Widget orDivider()=> Container(
       children: [
         ConstrainedBox(
             constraints: const BoxConstraints(
-                maxWidth: 500
+                maxWidth: 400
             ),
             child: const Divider(thickness: 2,color: grey,)),
         Positioned(
@@ -22,7 +22,7 @@ Widget orDivider()=> Container(
             padding: const EdgeInsets.symmetric(horizontal: 5 , vertical: 3),
             child: const Text(
               'OR',
-              style: TextStyle(color: black),
+              style: TextStyle(color: black , fontSize: 18),
             ),
           ),
         )

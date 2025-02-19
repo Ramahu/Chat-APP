@@ -1,4 +1,4 @@
-import 'package:chat/core/widgets/text_form.dart';
+import 'package:chat/features/auth/presentation/widgets/text_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/responsive_ui.dart';
@@ -21,7 +21,7 @@ import 'or_divider.dart';
 
 
 class LoginForm extends StatefulWidget {
-  const LoginForm({super.key});
+   const LoginForm({super.key});
 
   @override
   State<LoginForm> createState() => _LoginFormState();
@@ -47,7 +47,7 @@ class _LoginFormState extends State<LoginForm> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
              defaultTextForm(
-               width: Responsive.width(context) * 0.8,
+               width: 400,
                height: Responsive.heightMultiplier(context) * 7,
                bgColor:  isDarkMode ? grey[800] :grey[200],
                   controller: _emailController,
@@ -57,6 +57,7 @@ class _LoginFormState extends State<LoginForm> {
                   autofillHints: [AutofillHints.email],
                   label: 'Email Address',
                   labelStyle: const TextStyle(
+                    fontSize: 18,
                     color: grey,
                   ),
                   prefix: const Icon(
@@ -75,13 +76,14 @@ class _LoginFormState extends State<LoginForm> {
                 ),
                 SizedBox(height: Responsive.heightMultiplier(context) * 2,),
                 defaultTextForm(
-                  width: Responsive.width(context) * 0.8,
+                  width:400,
                   height: Responsive.heightMultiplier(context) * 7,
                   bgColor:  isDarkMode ? grey[800] :grey[200],
                   controller: _passwordController,
                   type: TextInputType.visiblePassword,
                   label: 'Password',
                   labelStyle: const TextStyle(
+                    fontSize: 18,
                     color: grey,
                   ),
                   prefix: const Icon(
@@ -115,7 +117,6 @@ class _LoginFormState extends State<LoginForm> {
                 BlocConsumer<AuthCubit,AuthState>(
                   listener: (context , state) async {
                     final AuthLocalDataSourceImpl authLocalDataSourceImpl = AuthLocalDataSourceImpl();
-                    // final currentUserId = authLocalDataSourceImpl.getCachedUid();
 
                     if(state is SignedInState){
                       authLocalDataSourceImpl.cacheUid(state.uid);
@@ -134,7 +135,6 @@ class _LoginFormState extends State<LoginForm> {
                             message:"User ID not found. Please sign in again." ,
                             context: context, isError: true);
                       }
-                      // navigateAndFinish(context, HomePage(currentUserId:currentUserId.toString()));
                     }else if ( state is GoogleSignInState){
                       authLocalDataSourceImpl.cacheUid(state.uid);
                       navigateAndFinish(context, HomePage(currentUserId:state.uid));
@@ -153,7 +153,7 @@ class _LoginFormState extends State<LoginForm> {
                     }
                     return defaultGradientBottom(
                     text: ' Log In',
-                    width: Responsive.width(context) * 0.8,
+                    width: 400,
     height: Responsive.heightMultiplier(context) * 6,
     context: context,
     color1: indigoAccent,
@@ -167,25 +167,31 @@ class _LoginFormState extends State<LoginForm> {
     );
                   }
                 ),
+
                 orDivider(),
-                    optionsBox(
-                      context: context,
-                        imgColor: red,
-                        borderColor: grey,
-                        imagePath: Assets.assetsGoogleIcon,
-                        onPressed: (){
-                          authCubit(context).signInWithGoogle();
-                        },
-                    ),
+
+                  optionsBox(
+                    context: context,
+                    imgColor: red,
+                    borderColor: grey,
+                    imagePath: Assets.assetsGoogleIcon,
+                    onPressed: () {
+                      authCubit(context).signInWithGoogle();
+                    },
+                  ),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("Need an account ?"),
-                    TextButton(
-                        onPressed: (){
-                          navigateAndReplace(context , const SignUp());
+                    const Text("Need an account ?" , style: TextStyle(fontSize: 18,)),
+                    Flexible(
+                      child: TextButton(
+                        onPressed: () {
+                          navigateAndReplace(context, const SignUp());
                         },
-                        child: const Text("Sign Up") )
+                        child: const Text("Sign Up"),
+                      ),
+                    ),
                   ],
                 ),
               ],

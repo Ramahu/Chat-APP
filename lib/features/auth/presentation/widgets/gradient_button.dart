@@ -36,6 +36,6 @@ Widget defaultGradientBottom({
               borderRadius: BorderRadius.circular(radius)),
         ),
         onPressed: function,
-        child: Text(text, style:  TextStyle(color: white, fontSize: Responsive.textMultiplier(context) * 5 )),
+        child: Text(text, style:  const TextStyle(color: white, fontSize: 25)),
       ),
     );

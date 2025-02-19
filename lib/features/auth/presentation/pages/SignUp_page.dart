@@ -24,9 +24,9 @@ class SignUp extends StatelessWidget{
                   image: const AssetImage(Assets.assetsSignIn)),
             ),
             ),
-            Center(
+            const Center(
                 child: Text("Sign Up",
-                  style: TextStyle(fontSize: Responsive.textMultiplier(context) * 7 ,
+                  style: TextStyle(fontSize: 35 ,
                       fontWeight: FontWeight.bold),)),
             SizedBox(height: Responsive.heightMultiplier(context) * 1.5,),
             const SignUpForm(),
