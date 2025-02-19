@@ -50,3 +50,15 @@ A real-time chat application is built with **Flutter** and follows a structured 
 - Caches **user ID** locally for session persistence
 
 ## **Interface**  
+
+- Splash Screen , Login (light and dark themes) :
+  
+![Mobile App Screen Mockup (2)](https://github.com/user-attachments/assets/8840c4ef-8194-47ee-a061-9761b2ac041e)
+
+-  Create account (light and dark themes) :
+
+  ![Mobile App Screen Mockup (1)](https://github.com/user-attachments/assets/a897b358-1a26-45b0-b6ed-cec6becf5576)
+
+-  Home page (all chats Screen) , chat screem (dark themes) :
+  
+![Mobile App Screen Mockup (3)](https://github.com/user-attachments/assets/6d50c907-2335-40d8-9e17-fb74a408bfb6)
