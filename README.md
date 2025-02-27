@@ -55,6 +55,8 @@ A real-time chat application is built with **Flutter** and follows a structured 
   
 ![Mobile App Screen Mockup (2)](https://github.com/user-attachments/assets/8840c4ef-8194-47ee-a061-9761b2ac041e)
 
+![New Website Blue Mockup Instagram - Laptop](https://github.com/user-attachments/assets/c139087b-80e7-4489-96d0-721e1eda0ae6)
+
 -  Create account (light and dark themes) :
 
   ![Mobile App Screen Mockup (1)](https://github.com/user-attachments/assets/a897b358-1a26-45b0-b6ed-cec6becf5576)
